@@ -1,0 +1,139 @@
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-zdzmc-2[0m stage [32mrelease[0m and container [32mstep-credential-initializer-dtfrj[0m
+{"level":"warn","ts":1585080287.3715835,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1585080287.3724089,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-zdzmc-2[0m stage [32mrelease[0m and container [32mstep-working-dir-initializer-gjrlh[0m
+{"level":"warn","ts":1585080288.6954765,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1585080288.696594,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-zdzmc-2[0m stage [32mrelease[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-zdzmc-2[0m stage [32mrelease[0m and container [32mstep-git-source-cb-kubecd-environment-jr-dev2-d-zdzmc-gkdw9[0m
+{"level":"warn","ts":1585080295.9018977,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1585080296.9229014,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/cb-kubecd/environment-jr-dev2-dev.git @ v0.0.2 in path /workspace/source"}
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-zdzmc-2[0m stage [32mrelease[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:01d8f5ae4f50114fdb7ef24120a998a5835552a9
+WARNING: no SHAs to merge, falling back to initial cloned commit
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-zdzmc-2[0m stage [32mrelease[0m and container [32mstep-validate-git[0m
+Git configured for user: jenkins-x-bot and email jenkins-x@googlegroups.com
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-zdzmc-2[0m stage [32mrelease[0m and container [32mstep-verify-preinstall[0m
+no need to reconnect to cluster
+writing the following to the OWNERS file for the development environment repository:
+approvers:
+- rawlingsj
+reviewers:
+- rawlingsj
+WARNING: TLS is not enabled so your webhooks will be called using HTTP. This means your webhook secret will be sent to your cluster in the clear. See https://jenkins-x.io/docs/getting-started/setup/boot/#ingress for more information
+Verifying the kubernetes cluster before we try to boot Jenkins X in namespace: **
+Trying to lazily create any missing resources to get the current cluster ready to boot Jenkins X
+Verifying Ingress...
+
+Using namespace '**' from context named '' on server ''.
+
+Verifying Storage...
+WARNING: Your requirements have not enabled cloud storage for logs - we recommend enabling this for kubernetes provider gke
+WARNING: Your requirements have not enabled cloud storage for reports - we recommend enabling this for kubernetes provider gke
+WARNING: Your requirements have not enabled cloud storage for repository - we recommend enabling this for kubernetes provider gke
+WARNING: Your requirements have not enabled cloud storage for backup - we recommend enabling this for kubernetes provider gke
+Storage configuration looks good
+
+Validating Kaniko secret in namespace **
+
+verified there is a ConfigMap config in namespace **
+verified there is a ConfigMap plugins in namespace **
+Cluster looks good, you are ready to '** boot' now!
+
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-zdzmc-2[0m stage [32mrelease[0m and container [32mstep-install-jx-crds[0m
+Jenkins X CRDs upgraded with success
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-zdzmc-2[0m stage [32mrelease[0m and container [32mstep-generate-helmfile[0m
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-zdzmc-2[0m stage [32mrelease[0m and container [32mstep-helmfile-system[0m
+Adding repo stable https://kubernetes-charts.storage.googleapis.com
+"stable" has been added to your repositories
+
+Updating repo
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "stable" chart repository
+Update Complete. ⎈ Happy Helming!⎈ 
+
+Affected releases are:
+  nginx-ingress (stable/nginx-ingress) UPDATED
+
+Upgrading release=nginx-ingress, chart=stable/nginx-ingress
+Release "nginx-ingress" has been upgraded. Happy Helming!
+NAME: nginx-ingress
+LAST DEPLOYED: Tue Mar 24 20:05:23 2020
+NAMESPACE: nginx
+STATUS: deployed
+REVISION: 3
+TEST SUITE: None
+NOTES:
+The nginx-ingress controller has been installed.
+It may take a few minutes for the LoadBalancer IP to be available.
+You can watch the status by running 'kubectl --namespace nginx get services -o wide -w nginx-ingress-controller'
+
+An example Ingress that makes use of the controller:
+
+  apiVersion: extensions/v1beta1
+  kind: Ingress
+Listing releases matching ^nginx-ingress$
+  metadata:
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    name: example
+    namespace: ***
+  spec:
+    rules:
+      - host: www.example.com
+        http:
+          paths:
+            - backend:
+                serviceName: exampleService
+                servicePort: 80
+              path: /
+    # This section is only required if TLS is to be enabled for the Ingress
+    tls:
+        - hosts:
+            - www.example.com
+          secretName: example-tls
+
+If TLS is enabled for the Ingress, a Secret containing the certificate and key must also be provided:
+
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: example-tls
+    namespace: ***
+  data:
+    tls.crt: <base64 encoded cert>
+    tls.key: <base64 encoded key>
+  type: kubernetes.io/tls
+
+nginx-ingress	nginx    	3       	2020-03-24 20:05:23.717170593 +0000 UTC	deployed	nginx-ingress-1.34.2	0.30.0     
+
+
+UPDATED RELEASES:
+NAME            CHART                  VERSION
+nginx-ingress   stable/nginx-ingress    1.34.2
+
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-zdzmc-2[0m stage [32mrelease[0m and container [32mstep-verify-ingress[0m
+using GKE with external dns, you can also now enable TLS
+validating the external-dns secret in namespace 
+attempting to lazily create the external-dns secret 
+Unable to find service account jr-dev2-dn, checking if we have enough permission to create
+error: creating the ExternalDNS GCP Service Account: creating the ExternalDNS GCP Service Account: creating the service account: failed to run 'gcloud iam list-testable-permissions //cloudresourcemanager.googleapis.com/projects/**-development --filter resourcemanager.projects.setIamPolicy' command in directory '', output: 'ERROR: gcloud crashed (MetadataServerException): HTTP Error 400: Bad Request
+
+If you would like to report this issue, please run the following command:
+  gcloud feedback
+
+To check gcloud for common problems, please run the following command:
+  gcloud info --run-diagnostics'
+[31m
+Pipeline failed on stage 'release' : container 'step-verify-ingress'. The execution of the pipeline has stopped.[0m
