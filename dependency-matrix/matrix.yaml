@@ -1,0 +1,7 @@
+dependencies:
+- host: github.com
+  owner: cb-kubecd
+  repo: jr-dev2-go1
+  url: https://github.com/cb-kubecd/jr-dev2-go1.git
+  version: ""
+  versionURL: ""
