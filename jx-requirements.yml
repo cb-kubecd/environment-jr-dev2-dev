@@ -51,8 +51,8 @@ environments:
 gitops: true
 helmfile: true
 ingress:
-  domain: 35.187.33.98.nip.io
-  externalDNS: false
+  domain: rawlingsdemo.co.uk
+  externalDNS: true
   namespaceSubDomain: -jx.
   tls:
     email: ""
