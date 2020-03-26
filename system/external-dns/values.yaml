@@ -16,8 +16,8 @@ provider: google
 google:
 #  serviceAccountSecret: external-dns-gcp-sa
 {{- if hasKey .Values.jxRequirements.cluster "project" }}
-  project: "{{ .Requirements.cluster.project }}"
-{{ end }}
+  project: "{{ .Values.jxRequirements.cluster.project }}"
+{{- end }}
 {{- end}}
 
 rbac:
