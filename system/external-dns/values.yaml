@@ -2,3 +2,30 @@ rbac:
   serviceAccountAnnotations:
     foo: bar
     iam.gke.io/gcp-service-account: jr-dev2-ex@jx-development.iam.gserviceaccount.com
+
+enabled: {{ .jxRequirements.ingress.externalDNS }}
+sources:
+- ingress
+{{- if eq .jxRequirements.cluster.provider "eks"}}
+provider: aws
+aws:
+  region: {{ .jxRequirements.cluster.region}}
+securityContext:
+  fsGroup: 65534
+{{- else if eq .jxRequirements.cluster.provider "gke"}}
+provider: google
+google:
+  serviceAccountSecret: external-dns-gcp-sa
+{{- if hasKey .jxRequirements.cluster "project" }}
+  project: "{{ .Requirements.cluster.project }}"
+{{ end }}
+{{- end}}
+
+rbac:
+  create: true
+domainFilters:
+{{- range .jxRequirements.environments }}
+{{- if .ingress.domain }}
+- "{{ .ingress.domain }}"
+{{- end }}
+{{- end }}
