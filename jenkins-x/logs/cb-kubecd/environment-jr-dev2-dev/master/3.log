@@ -1,0 +1,285 @@
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-cd654-3[0m stage [32mrelease[0m and container [32mstep-credential-initializer-m68xw[0m
+{"level":"warn","ts":1585226569.6178594,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1585226569.618464,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-cd654-3[0m stage [32mrelease[0m and container [32mstep-working-dir-initializer-dv68c[0m
+{"level":"warn","ts":1585226570.166806,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1585226570.1689537,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-cd654-3[0m stage [32mrelease[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-cd654-3[0m stage [32mrelease[0m and container [32mstep-git-source-cb-kubecd-environment-jr-dev2-d-cd654-grtbs[0m
+{"level":"warn","ts":1585226577.2950583,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1585226578.2909024,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/cb-kubecd/environment-jr-dev2-dev.git @ v0.0.3 in path /workspace/source"}
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-cd654-3[0m stage [32mrelease[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:6771e65c58a251c73a2db2db1676c62dd43fb15c
+WARNING: no SHAs to merge, falling back to initial cloned commit
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-cd654-3[0m stage [32mrelease[0m and container [32mstep-validate-git[0m
+Git configured for user: jenkins-x-bot and email jenkins-x@googlegroups.com
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-cd654-3[0m stage [32mrelease[0m and container [32mstep-verify-preinstall[0m
+no need to reconnect to cluster
+writing the following to the OWNERS file for the development environment repository:
+approvers:
+- rawlingsj
+reviewers:
+- rawlingsj
+WARNING: TLS is not enabled so your webhooks will be called using HTTP. This means your webhook secret will be sent to your cluster in the clear. See https://jenkins-x.io/docs/getting-started/setup/boot/#ingress for more information
+Verifying the kubernetes cluster before we try to boot Jenkins X in namespace: **
+Trying to lazily create any missing resources to get the current cluster ready to boot Jenkins X
+Verifying Ingress...
+
+Using namespace '**' from context named '' on server ''.
+
+Verifying Storage...
+WARNING: Your requirements have not enabled cloud storage for logs - we recommend enabling this for kubernetes provider gke
+WARNING: Your requirements have not enabled cloud storage for reports - we recommend enabling this for kubernetes provider gke
+WARNING: Your requirements have not enabled cloud storage for repository - we recommend enabling this for kubernetes provider gke
+WARNING: Your requirements have not enabled cloud storage for backup - we recommend enabling this for kubernetes provider gke
+Storage configuration looks good
+
+Validating Kaniko secret in namespace **
+
+verified there is a ConfigMap config in namespace **
+verified there is a ConfigMap plugins in namespace **
+Cluster looks good, you are ready to '** boot' now!
+
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-cd654-3[0m stage [32mrelease[0m and container [32mstep-install-jx-crds[0m
+Jenkins X CRDs upgraded with success
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-cd654-3[0m stage [32mrelease[0m and container [32mstep-generate-helmfile[0m
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-cd654-3[0m stage [32mrelease[0m and container [32mstep-helmfile-system[0m
+Adding repo bitnami https://charts.bitnami.com/bitnami
+"bitnami" has been added to your repositories
+
+Adding repo stable https://kubernetes-charts.storage.googleapis.com
+"stable" has been added to your repositories
+
+Updating repo
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "bitnami" chart repository
+...Successfully got an update from the "stable" chart repository
+Update Complete. ⎈ Happy Helming!⎈ 
+
+Affected releases are:
+  external-dns (bitnami/external-dns) UPDATED
+  nginx-ingress (stable/nginx-ingress) UPDATED
+
+Upgrading release=external-dns, chart=bitnami/external-dns
+Upgrading release=nginx-ingress, chart=stable/nginx-ingress
+Release "nginx-ingress" has been upgraded. Happy Helming!
+NAME: nginx-ingress
+LAST DEPLOYED: Thu Mar 26 12:43:27 2020
+NAMESPACE: nginx
+STATUS: deployed
+REVISION: 10
+TEST SUITE: None
+NOTES:
+The nginx-ingress controller has been installed.
+It may take a few minutes for the LoadBalancer IP to be available.
+You can watch the status by running 'kubectl --namespace nginx get services -o wide -w nginx-ingress-controller'
+
+An example Ingress that makes use of the controller:
+
+  apiVersion: extensions/v1beta1
+  kind: Ingress
+  metadata:
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    name: example
+    namespace: ***
+  spec:
+    rules:
+      - host: www.example.com
+        http:
+          paths:
+            - backend:
+                serviceName: exampleService
+                servicePort: 80
+              path: /
+    # This section is only required if TLS is to be enabled for the Ingress
+    tls:
+        - hosts:
+            - www.example.com
+          secretName: example-tls
+
+If TLS is enabled for the Ingress, a Secret containing the certificate and key must also be provided:
+
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: example-tls
+    namespace: ***
+  data:
+    tls.crt: <base64 encoded cert>
+    tls.key: <base64 encoded key>
+  type: kubernetes.io/tls
+
+Listing releases matching ^nginx-ingress$
+nginx-ingress	nginx    	10      	2020-03-26 12:43:27.258194443 +0000 UTC	deployed	nginx-ingress-1.34.2	0.30.0     
+
+Release "external-dns" does not exist. Installing it now.
+NAME: external-dns
+LAST DEPLOYED: Thu Mar 26 12:43:26 2020
+NAMESPACE: **
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+** Please be patient while the chart is being deployed **
+
+To verify that external-dns has started, run:
+
+  kubectl --namespace=** get pods -l "app.kubernetes.io/name=external-dns,app.kubernetes.io/instance=external-dns"
+
+Listing releases matching ^external-dns$
+external-dns	**       	1       	2020-03-26 12:43:26.912855558 +0000 UTC	deployed	external-dns-2.20.5	0.7.0      
+
+
+UPDATED RELEASES:
+NAME            CHART                  VERSION
+nginx-ingress   stable/nginx-ingress    1.34.2
+external-dns    bitnami/external-dns    2.20.5
+
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-cd654-3[0m stage [32mrelease[0m and container [32mstep-verify-ingress[0m
+using a custom domain and GKE, you can enable external dns and TLS
+
+Showing logs for build [32mcb-kubecd-environment-jr-dev2-d-cd654-3[0m stage [32mrelease[0m and container [32mstep-helmfile-apps[0m
+Adding repo jenkins-x https://storage.googleapis.com/chartmuseum.jenkins-x.io
+"jenkins-x" has been added to your repositories
+
+Updating repo
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "bitnami" chart repository
+...Successfully got an update from the "stable" chart repository
+...Successfully got an update from the "jenkins-x" chart repository
+Update Complete. ⎈ Happy Helming!⎈ 
+
+Building dependency release=repositories, chart=../repositories
+Affected releases are:
+  chartmuseum (jenkins-x/chartmuseum) UPDATED
+  **boot-helmfile-resources (jenkins-x/**boot-helmfile-resources) UPDATED
+  **ui (jenkins-x/**ui) UPDATED
+  lighthouse (jenkins-x/lighthouse) UPDATED
+  nexus (jenkins-x/nexus) UPDATED
+  repositories (../repositories) UPDATED
+  tekton (jenkins-x/tekton) UPDATED
+
+Upgrading release=**boot-helmfile-resources, chart=jenkins-x/**boot-helmfile-resources
+Upgrading release=lighthouse, chart=jenkins-x/lighthouse
+Upgrading release=tekton, chart=jenkins-x/tekton
+Upgrading release=nexus, chart=jenkins-x/nexus
+Upgrading release=**ui, chart=jenkins-x/**ui
+Upgrading release=chartmuseum, chart=jenkins-x/chartmuseum
+Upgrading release=repositories, chart=../repositories
+Listing releases matching ^chartmuseum$
+Release "chartmuseum" has been upgraded. Happy Helming!
+NAME: chartmuseum
+LAST DEPLOYED: Thu Mar 26 12:43:55 2020
+NAMESPACE: **
+STATUS: deployed
+REVISION: 3
+TEST SUITE: None
+NOTES:
+** Please be patient while the chart is being deployed **
+
+Get the ChartMuseum URL by running:
+
+  export POD_NAME=$(kubectl get pods --namespace ** -l "app=chartmuseum" -l "release=chartmuseum" -o jsonpath="{.items[0].metadata.name}")
+  echo http://127.0.0.1:8080/
+  kubectl port-forward $POD_NAME 8080:8080 --namespace **
+
+chartmuseum	**       	3       	2020-03-26 12:43:55.474931986 +0000 UTC	deployed	chartmuseum-1.1.7	0.7.1      
+
+Release "lighthouse" has been upgraded. Happy Helming!
+NAME: lighthouse
+LAST DEPLOYED: Thu Mar 26 12:43:55 2020
+NAMESPACE: **
+STATUS: deployed
+REVISION: 3
+TEST SUITE: None
+NOTES:
+Get the application URL by running these commands:
+
+kubectl get ingress lighthouse-lighthouse
+
+Listing releases matching ^lighthouse$
+lighthouse	**       	3       	2020-03-26 12:43:55.746313353 +0000 UTC	deployed	lighthouse-0.0.493	0.0.493    
+
+Release "nexus" has been upgraded. Happy Helming!
+NAME: nexus
+LAST DEPLOYED: Thu Mar 26 12:43:56 2020
+NAMESPACE: **
+STATUS: deployed
+REVISION: 3
+TEST SUITE: None
+NOTES:
+It may take a few minutes for Nexus to become ready
+
+Listing releases matching ^nexus$
+nexus	**       	3       	2020-03-26 12:43:56.031654862 +0000 UTC	deployed	nexus-0.1.21	           
+
+Release "tekton" has been upgraded. Happy Helming!
+NAME: tekton
+LAST DEPLOYED: Thu Mar 26 12:43:55 2020
+NAMESPACE: **
+STATUS: deployed
+REVISION: 3
+TEST SUITE: None
+NOTES:
+Tekton Pipelines
+
+Listing releases matching ^tekton$
+tekton	**       	3       	2020-03-26 12:43:55.995116449 +0000 UTC	deployed	tekton-0.0.49	           
+
+Listing releases matching ^**boot-helmfile-resources$
+Release "**boot-helmfile-resources" has been upgraded. Happy Helming!
+NAME: **boot-helmfile-resources
+LAST DEPLOYED: Thu Mar 26 12:43:56 2020
+NAMESPACE: **
+STATUS: deployed
+REVISION: 3
+TEST SUITE: None
+
+**boot-helmfile-resources	**       	3       	2020-03-26 12:43:56.266202764 +0000 UTC	deployed	**boot-helmfile-resources-0.0.103	           
+
+Release "**ui" has been upgraded. Happy Helming!
+NAME: **ui
+LAST DEPLOYED: Thu Mar 26 12:43:55 2020
+NAMESPACE: **
+STATUS: deployed
+REVISION: 3
+TEST SUITE: None
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace ** -l "app=**ui,release=**ui" -o jsonpath="{.items[0].metadata.name}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl port-forward $POD_NAME 8080:80
+
+Listing releases matching ^**ui$
+**ui	**       	3       	2020-03-26 12:43:55.936369585 +0000 UTC	deployed	**ui-0.0.1164	0.0.1164   
+
+
+UPDATED RELEASES:
+NAME                        CHART                                  VERSION
+chartmuseum                 jenkins-x/chartmuseum                    1.1.7
+lighthouse                  jenkins-x/lighthouse                   0.0.493
+nexus                       jenkins-x/nexus                         0.1.21
+tekton                      jenkins-x/tekton                        0.0.49
+**boot-helmfile-resources   jenkins-x/**boot-helmfile-resources    0.0.103
+**ui                        jenkins-x/**ui                        0.0.1164
+
+
+FAILED RELEASES:
+NAME
+repositories
+in ./helmfile.yaml: failed processing release repositories: helm exited with status 1:
+  Error: UPGRADE FAILED: rendered manifests contain a new resource that already exists. Unable to continue with update: existing resource conflict: kind: SourceRepository, namespace: **, name: cb-kubecd-jr-dev2-go1
+[31m
+Pipeline failed on stage 'release' : container 'step-helmfile-apps'. The execution of the pipeline has stopped.[0m
