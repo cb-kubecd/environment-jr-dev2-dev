@@ -18,7 +18,7 @@ google:
 {{- if hasKey .Values.jxRequirements.cluster "project" }}
   project: "{{ .Values.jxRequirements.cluster.project }}"
 {{- end }}
-{{- end}}
+{{- end }}
 
 rbac:
   create: true
