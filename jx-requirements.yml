@@ -52,7 +52,7 @@ gitops: true
 helmfile: true
 ingress:
   domain: rawlingsdemo.co.uk
-  externalDNS: true
+  externalDNS: false
   namespaceSubDomain: -jx.
   tls:
     email: ""

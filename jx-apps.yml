@@ -6,5 +6,7 @@ apps:
 - name: jenkins-x/tekton
 - name: jenkins-x/chartmuseum
 - name: jenkins-x/jxui
+- name: bitnami/external-dns
+  phase: system
 - name: repositories
   repository: ".."
