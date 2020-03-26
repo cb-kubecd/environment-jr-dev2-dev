@@ -19,7 +19,7 @@ cluster:
   zone: europe-west1-b
 environments:
 - ingress:
-    domain: 35.187.33.98.nip.io
+    domain: rawlingsdemo.co.uk
     externalDNS: false
     namespaceSubDomain: -jx.
     tls:
