@@ -3,20 +3,20 @@ rbac:
     foo: bar
     iam.gke.io/gcp-service-account: jr-dev2-ex@jx-development.iam.gserviceaccount.com
 
-enabled: {{ .jxRequirements.ingress.externalDNS }}
+enabled: {{ .Values.jxRequirements.ingress.externalDNS }}
 sources:
 - ingress
-{{- if eq .jxRequirements.cluster.provider "eks"}}
+{{- if eq .Values.jxRequirements.cluster.provider "eks"}}
 provider: aws
 aws:
-  region: {{ .jxRequirements.cluster.region}}
+  region: {{ .Values.jxRequirements.cluster.region}}
 securityContext:
   fsGroup: 65534
-{{- else if eq .jxRequirements.cluster.provider "gke"}}
+{{- else if eq .Values.jxRequirements.cluster.provider "gke"}}
 provider: google
 google:
   serviceAccountSecret: external-dns-gcp-sa
-{{- if hasKey .jxRequirements.cluster "project" }}
+{{- if hasKey .Values.jxRequirements.cluster "project" }}
   project: "{{ .Requirements.cluster.project }}"
 {{ end }}
 {{- end}}
@@ -24,7 +24,7 @@ google:
 rbac:
   create: true
 domainFilters:
-{{- range .jxRequirements.environments }}
+{{- range .Values.jxRequirements.environments }}
 {{- if .ingress.domain }}
 - "{{ .ingress.domain }}"
 {{- end }}
